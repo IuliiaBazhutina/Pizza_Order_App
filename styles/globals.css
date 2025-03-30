@@ -1,0 +1,56 @@
+:root {
+  --background: #eee2df;
+  --foreground: #171717;
+
+  /* color palette */
+  --lightest: #eee2df;
+  --light: #eed7c5;
+  --medium: #c89f9c;
+  --dark: #c97c5d;
+  --darkest: #b36a5e;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #b36a5e;
+    --foreground: #eee2df;
+
+    /* color palette reversed for dark*/
+    --darkest: #eee2df;
+    --dark: #eed7c5;
+    --medium: #c89f9c;
+    --light: #c97c5d;
+    --lightest: #b36a5e;
+  }
+}
+
+html,
+body {
+  max-width: 100vw;
+  overflow-x: hidden;
+}
+
+body {
+  color: var(--foreground);
+  background: var(--background);
+  font-family: Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+@media (prefers-color-scheme: dark) {
+  html {
+    color-scheme: dark;
+  }
+}
