@@ -1,0 +1,12 @@
+.header {
+  padding: 5px 10px;
+  color: var(--lightest);
+  padding: 30px;
+  background-color: var(--lightest);
+  color: var(--foreground);
+  font-weight: bolder;
+  text-transform: uppercase;
+}
+.header span:hover {
+  text-decoration: underline;
+}
