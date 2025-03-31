@@ -1,0 +1,63 @@
+.wrapper {
+  margin: 0 auto;
+  width: 100%;
+}
+
+.login {
+  display: grid;
+  padding: 30px;
+  align-content: center;
+  justify-content: center;
+  gap: 20px;
+  background-color: var(--medium);
+  border: solid 1px var(--dark);
+  border-radius: 5px;
+  padding: 50px;
+  max-width: 400px;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  max-width: 350px;
+}
+.form label {
+  font-weight: 600;
+}
+
+.form input {
+  padding: 5px 10px;
+  border-radius: 5px;
+  border: solid 1px var(--dark);
+  background-color: var(--darkest);
+  color: var(--lightest);
+}
+
+.form button {
+  padding: 5px 10px;
+  border-radius: 5px;
+  border: solid 1px var(--dark);
+  background-color: var(--dark);
+  color: var(--lightest);
+  cursor: pointer;
+}
+.form button:hover {
+  background-color: var(--darkest);
+}
+
+.welcome {
+  display: grid;
+  padding: 30px;
+  align-content: center;
+  justify-content: center;
+  gap: 20px;
+}
+.welcome button {
+  padding: 5px 10px;
+  border-radius: 5px;
+  border: solid 1px var(--dark);
+  background-color: var(--dark);
+  color: var(--lightest);
+  cursor: pointer;
+}
