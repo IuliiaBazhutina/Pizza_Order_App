@@ -1,0 +1,31 @@
+.wrapper {
+  margin: 30px auto;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  flex-direction: column;
+}
+.toppings {
+  width: 300px;
+  background-color: var(--lightest);
+  padding: 20px;
+  border-radius: 5px;
+  border: solid 1px var(--darkest);
+}
+.list {
+  padding: 5px;
+}
+.filters {
+  padding: 10px;
+  background-color: var(--light);
+  border-radius: 5px;
+}
+.selected span {
+  color: var(--darkest);
+}
+.selected .total {
+  font-weight: 800;
+  margin-top: 20px;
+}

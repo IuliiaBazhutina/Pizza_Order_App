@@ -1,4 +1,5 @@
 import { useState } from "react";
+import styles from "@/styles/List.module.css";
 
 function List() {
   const [isFilterChecked, setIsFilterChecked] = useState(false);
@@ -47,51 +48,53 @@ function List() {
     margin: "10px auto",
     listStyleType: "none",
     cursor: "pointer",
-    color: isSelected ? "black" : "gray",
+    color: isSelected ? "var(--dark)" : "var(--darkest)",
   });
 
   return (
-    <div>
-      <ul>
-        {filteredItems.map((item) => (
-          <li
-            style={liStyle(selectedItems.some((selectedItem) => selectedItem.id === item.id))}
-            key={item.id}
-            onClick={() => onSelectItem(item)}
-          >
-            <div style={{ display: "flex", justifyContent: "space-between", width: "200px" }}>
-              <span>{item.name}</span>
-              <span>{item.price}</span>
-            </div>
-          </li>
-        ))}
-      </ul>
-
-      <label style={{ display: "block" }}>
-        <input
-          type="checkbox"
-          onChange={() => {
-            setIsFilterChecked(!isFilterChecked);
-          }}
-          style={{ margin: "30px auto 10px", display: "inline" }}
-        />{" "}
-        Show only vegetarian toppings
-      </label>
-
-      {selectedItems.length > 0 && (
-        <div>
-          <h3 style={{ marginTop: "30px" }}>Selected Items:</h3>
-          {selectedItems.map((item) => (
-            <li style={liStyle(true)}>
+    <div className={styles.wrapper}>
+      <div className={styles.toppings}>
+        <ul className={styles.list}>
+          {filteredItems.map((item) => (
+            <li
+              style={liStyle(selectedItems.some((selectedItem) => selectedItem.id === item.id))}
+              key={item.id}
+              onClick={() => onSelectItem(item)}
+            >
               <div style={{ display: "flex", justifyContent: "space-between", width: "200px" }}>
                 <span>{item.name}</span>
                 <span>{item.price}</span>
               </div>
             </li>
           ))}
-          <p>Total: ${calculateTotal()}</p>
-        </div>
-      )}
+        </ul>
+
+        <label style={{ display: "block" }} className={styles.filters}>
+          <input
+            type="checkbox"
+            onChange={() => {
+              setIsFilterChecked(!isFilterChecked);
+            }}
+            style={{ display: "inline" }}
+          />{" "}
+          Show only vegetarian toppings
+        </label>
+
+        {selectedItems.length > 0 && (
+          <div className={styles.selected}>
+            <h3 style={{ marginTop: "30px" }}>Selected Items:</h3>
+            {selectedItems.map((item) => (
+              <li style={liStyle(true)}>
+                <div style={{ display: "flex", justifyContent: "space-between", width: "200px" }}>
+                  <span>{item.name}</span>
+                  <span>{item.price}</span>
+                </div>
+              </li>
+            ))}
+            <p className={styles.total}>Total: ${calculateTotal()}</p>
+          </div>
+        )}
+      </div>
     </div>
   );
 }

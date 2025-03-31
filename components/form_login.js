@@ -45,21 +45,35 @@ function LogIn({ children }) {
   };
 
   return (
-    <div>
-      <h2>Login</h2>
+    <div className={styles.wrapper}>
+      {!isLoggedIn && (
+        <div>
+          <div style={{ marginBottom: "30px", width: "100%", textAlign: "center" }}>
+            <h2 style={{ marginBottom: "10px" }}>Welcome to the Pizzeria</h2>
+            <p>Please login to begin your order</p>
+          </div>
+          <div className={styles.login}>
+            <h2>Login</h2>
+            <form onSubmit={handleLogin} id="form" className={styles.form}>
+              <label>Name</label>
+              <input type="text" onBlur={(e) => nameValidation(e.target.value)} />
 
-      <form onSubmit={handleLogin} id="form">
-        <label>Name</label>
-        <input type="text" onBlur={(e) => nameValidation(e.target.value)} />
+              <label>Email</label>
+              <input type="email" onBlur={(e) => emailValidation(e.target.value)} />
 
-        <label>Email</label>
-        <input type="email" onBlur={(e) => emailValidation(e.target.value)} />
-
-        <button type="submit">Log In</button>
-      </form>
-      <p>{message}</p>
+              <button type="submit">Log In</button>
+            </form>
+            <p>{message}</p>
+          </div>
+        </div>
+      )}
       {/* renders only if user is logged in */}
-      {isLoggedIn && <h2>Welcome, {name}!</h2>}
+      {isLoggedIn && (
+        <div className={styles.welcome}>
+          <h2>Welcome, {name}!</h2>
+          <button onClick={(e) => setIsLoggedIn(!isLoggedIn)}>Logout</button>
+        </div>
+      )}
 
       <UserContext.Provider value={{ name, email }}>{children}</UserContext.Provider>
     </div>
