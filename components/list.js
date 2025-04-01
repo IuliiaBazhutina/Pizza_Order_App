@@ -1,10 +1,11 @@
 import { useState } from "react";
 import Link from "next/link";
 import styles from "@/styles/List.module.css";
+import { PizzaContext, usePizza } from "./PizzaContext";
 
 function List() {
   const [isFilterChecked, setIsFilterChecked] = useState(false);
-  const [selectedItems, setSelectedItems] = useState([]);
+  const { selectedToppings, toggleTopping, calculateTotal } = usePizza();
 
   const items = [
     { id: 1, name: "Basil", vegetarian: true, price: 1.5 },
@@ -25,22 +26,9 @@ function List() {
   const filteredItems = isFilterChecked ? items.filter((item) => item.vegetarian) : items;
 
   // Function to handle item click and toggle selection
+  // Uses Pizza Context
   const onSelectItem = (item) => {
-    // Check if the item is already selected
-    if (selectedItems.some((selectedItem) => selectedItem.id === item.id)) {
-      // If it's already selected, remove it from the array
-      setSelectedItems((prevItems) =>
-        prevItems.filter((selectedItem) => selectedItem.id !== item.id)
-      );
-    } else {
-      // If it's not selected, add it to the array
-      setSelectedItems((prevItems) => [...prevItems, item]);
-    }
-  };
-
-  // Calculate total price of selected items
-  const calculateTotal = () => {
-    return selectedItems.reduce((total, item) => total + item.price, 0).toFixed(2);
+    toggleTopping(item);
   };
 
   //style
@@ -58,7 +46,7 @@ function List() {
         <ul className={styles.list}>
           {filteredItems.map((item) => (
             <li
-              style={liStyle(selectedItems.some((selectedItem) => selectedItem.id === item.id))}
+              style={liStyle(selectedToppings.some((selectedItem) => selectedItem.id === item.id))}
               key={item.id}
               onClick={() => onSelectItem(item)}
             >
@@ -84,7 +72,7 @@ function List() {
 
       <div className={styles.total}>
         <p>Total: ${calculateTotal()}</p>
-        {selectedItems.length > 0 && (
+        {selectedToppings.length > 0 && (
           <Link href="./checkout">
             <span>Checkout</span>
           </Link>
