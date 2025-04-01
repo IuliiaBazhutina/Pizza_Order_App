@@ -3,6 +3,7 @@ import { useContext, useState } from "react";
 import { UserContext } from "@/components/form_login";
 import Link from "next/link";
 import styles from "@/styles/Nav.module.css";
+import Oven from "@/components/oven";
 
 export default function Home() {
   //   const { name } = useContext(UserContext);
@@ -18,6 +19,7 @@ export default function Home() {
           <p>Please select the ingredients you'd like on your pizza.</p>
         </div>
         <List />
+        <Oven />
       </div>
     </>
   );
