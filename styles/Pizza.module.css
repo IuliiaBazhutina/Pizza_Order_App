@@ -1,0 +1,58 @@
+.controls {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 500px;
+}
+
+.controlsTop {
+  background-color: var(--lightest);
+  width: 350px;
+  height: 40px;
+}
+.controlsBottom {
+  clip-path: polygon(15% 0%, 85% 0%, 100% 100%, 0 100%);
+  background-color: #26231f;
+  width: 500px;
+  height: 20px;
+}
+.img {
+  max-width: 300px;
+  position: absolute;
+  left: 70px;
+  top: 25px;
+}
+
+.oven {
+  width: 500px;
+  height: 400px;
+  background-color: var(--lightest);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.window {
+  width: 450px;
+  height: 350px;
+  background-color: var(--accent);
+  border-radius: 10px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+.window div {
+  width: 300px;
+  height: 200px;
+  position: relative;
+}
+.feetWrapper {
+  width: 500px;
+  height: 20px;
+  display: flex;
+  justify-content: space-between;
+}
+.feet {
+  width: 20px;
+  height: 20px;
+  background-color: var(--lightest);
+}

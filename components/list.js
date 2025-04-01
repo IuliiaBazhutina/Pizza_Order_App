@@ -1,9 +1,11 @@
 import { useState } from "react";
+import Link from "next/link";
 import styles from "@/styles/List.module.css";
+import { PizzaContext, usePizza } from "./PizzaContext";
 
 function List() {
   const [isFilterChecked, setIsFilterChecked] = useState(false);
-  const [selectedItems, setSelectedItems] = useState([]);
+  const { selectedToppings, toggleTopping, calculateTotal } = usePizza();
 
   const items = [
     { id: 1, name: "Basil", vegetarian: true, price: 1.5 },
@@ -24,22 +26,9 @@ function List() {
   const filteredItems = isFilterChecked ? items.filter((item) => item.vegetarian) : items;
 
   // Function to handle item click and toggle selection
+  // Uses Pizza Context
   const onSelectItem = (item) => {
-    // Check if the item is already selected
-    if (selectedItems.some((selectedItem) => selectedItem.id === item.id)) {
-      // If it's already selected, remove it from the array
-      setSelectedItems((prevItems) =>
-        prevItems.filter((selectedItem) => selectedItem.id !== item.id)
-      );
-    } else {
-      // If it's not selected, add it to the array
-      setSelectedItems((prevItems) => [...prevItems, item]);
-    }
-  };
-
-  // Calculate total price of selected items
-  const calculateTotal = () => {
-    return selectedItems.reduce((total, item) => total + item.price, 0).toFixed(2);
+    toggleTopping(item);
   };
 
   //style
@@ -52,12 +41,12 @@ function List() {
   });
 
   return (
-    <div className={styles.wrapper}>
+    <div>
       <div className={styles.toppings}>
         <ul className={styles.list}>
           {filteredItems.map((item) => (
             <li
-              style={liStyle(selectedItems.some((selectedItem) => selectedItem.id === item.id))}
+              style={liStyle(selectedToppings.some((selectedItem) => selectedItem.id === item.id))}
               key={item.id}
               onClick={() => onSelectItem(item)}
             >
@@ -79,20 +68,14 @@ function List() {
           />{" "}
           Show only vegetarian toppings
         </label>
+      </div>
 
-        {selectedItems.length > 0 && (
-          <div className={styles.selected}>
-            <h3 style={{ marginTop: "30px" }}>Selected Items:</h3>
-            {selectedItems.map((item) => (
-              <li style={liStyle(true)}>
-                <div style={{ display: "flex", justifyContent: "space-between", width: "200px" }}>
-                  <span>{item.name}</span>
-                  <span>{item.price}</span>
-                </div>
-              </li>
-            ))}
-            <p className={styles.total}>Total: ${calculateTotal()}</p>
-          </div>
+      <div className={styles.total}>
+        <p>Total: ${calculateTotal()}</p>
+        {selectedToppings.length > 0 && (
+          <Link href="./checkout">
+            <span>Checkout</span>
+          </Link>
         )}
       </div>
     </div>
