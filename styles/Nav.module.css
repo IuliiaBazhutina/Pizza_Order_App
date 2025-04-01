@@ -1,12 +1,32 @@
 .header {
-  padding: 5px 10px;
+  padding: 30px 50px;
   color: var(--lightest);
-  padding: 30px;
   background-color: var(--lightest);
   color: var(--foreground);
   font-weight: bolder;
   text-transform: uppercase;
+
+  width: 100%;
 }
+.header div {
+  max-width: 1020px;
+  display: flex;
+  justify-content: space-between;
+  margin: 0 auto;
+}
+
+.header span {
+  padding: 12px 20px;
+  background-color: var(--medium);
+  border-bottom: 3px solid var(--light);
+  border-top: 3px solid transparent;
+  border-radius: 20px;
+}
+
 .header span:hover {
-  text-decoration: underline;
+  border-bottom: 3px solid var(--dark);
+}
+.header span:active {
+  border-top: 3px none;
+  border-bottom: 3px solid var(--medium);
 }

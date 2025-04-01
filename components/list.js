@@ -1,4 +1,5 @@
 import { useState } from "react";
+import Link from "next/link";
 import styles from "@/styles/List.module.css";
 
 function List() {
@@ -52,7 +53,7 @@ function List() {
   });
 
   return (
-    <div className={styles.wrapper}>
+    <div>
       <div className={styles.toppings}>
         <ul className={styles.list}>
           {filteredItems.map((item) => (
@@ -79,20 +80,14 @@ function List() {
           />{" "}
           Show only vegetarian toppings
         </label>
+      </div>
 
+      <div className={styles.total}>
+        <p>Total: ${calculateTotal()}</p>
         {selectedItems.length > 0 && (
-          <div className={styles.selected}>
-            <h3 style={{ marginTop: "30px" }}>Selected Items:</h3>
-            {selectedItems.map((item) => (
-              <li style={liStyle(true)}>
-                <div style={{ display: "flex", justifyContent: "space-between", width: "200px" }}>
-                  <span>{item.name}</span>
-                  <span>{item.price}</span>
-                </div>
-              </li>
-            ))}
-            <p className={styles.total}>Total: ${calculateTotal()}</p>
-          </div>
+          <Link href="./checkout">
+            <span>Checkout</span>
+          </Link>
         )}
       </div>
     </div>
