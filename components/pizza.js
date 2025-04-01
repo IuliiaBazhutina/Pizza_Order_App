@@ -9,19 +9,19 @@ const Pizza = () => {
   // for setting default selections and proper layering
   const defaultToppings = selectedToppings.map((item) => item.id);
 
+  // Check if any crust is selected
+  const hasWheat = defaultToppings.includes(12);
+
   return (
     <div>
       {
-        // Require a crust, default to classic if none selected //
+        // Require a crust, default to classic if wheat not selected //
         // Crust on bottom //
-        (defaultToppings.includes(11) ||
-          defaultToppings.includes(12) ||
-          defaultToppings.length === 0) && (
-          <img
-            src={defaultToppings.includes(12) ? Toppings[11].src.src : Toppings[10].src.src}
-            alt="Crust"
-            className={styles.img}
-          />
+        hasWheat ? (
+          <img src={Toppings[11].src.src} alt="Whole Wheat Crust" className={styles.img} />
+        ) : (
+          // Show classic crust if selected or as default
+          <img src={Toppings[10].src.src} alt="Classic Crust" className={styles.img} />
         )
       }
 
