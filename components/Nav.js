@@ -9,10 +9,13 @@ const Nav = () => {
           <span>Home</span>
         </Link>
         <Link href="./ingredients">
-          <span>Choose ingredients</span>
+          <span>Choose toppings</span>
+        </Link>
+        <Link href="./delivery">
+          <span>Delivery options</span>
         </Link>
         <Link href="./review">
-          <span>Account</span>
+          <span>Receipt</span>
         </Link>
       </div>
     </nav>

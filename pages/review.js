@@ -3,11 +3,13 @@ import { createContext, useState, useContext } from "react";
 import { PizzaProvider } from "@/components/PizzaContext";
 import { useRouter } from 'next/router';
 import styles from "@/styles/review.module.css";
+import {UserContext} from "@/components/UserContext"
 
 export default function Account() {
 
   const { selectedToppings } = useContext(PizzaContext);
 
+  const {name} = useContext(UserContext);
 
   const { calculateTotal } = useContext(PizzaContext); // Access the function from context
 
@@ -18,14 +20,10 @@ export default function Account() {
   const router = useRouter();
   const { data } = router.query;
 
-  // filter to select specific toppings by id
-  // for setting default selections and proper layering
-
-
   return (
 
     <div>
-      <h1>Thank you for your order!</h1>
+      <h1>{name}, thank you for your order!</h1>
 
       <h3 style={{ marginTop: '30px' }}>You chose the next toppings:</h3>
 

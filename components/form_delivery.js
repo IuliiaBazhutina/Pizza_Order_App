@@ -5,10 +5,9 @@ import { useRouter } from 'next/router';
 
 export default function Delivery() {
   const [deliveryOption, setDeliveryOption] = useState('');
-  const [address, setAddress] = useState({streetAddress:"", city:"", postalCode:""});
+  const [address, setAddress] = useState({ streetAddress: "", city: "", postalCode: "" });
   const [isOrderPlaced, setIsOrderPlaced] = useState(false);
   const [message, setMessage] = useState("");
-  // const [prop, setProp] = useState("");
 
   const router = useRouter();
 
@@ -22,32 +21,35 @@ export default function Delivery() {
     const { name, value } = e.target;
     setAddress((prevAddress) => ({
       ...prevAddress,
-      [name]: value  
+      [name]: value
     }));
   };
- 
+
 
   const handleSubmit = (e) => {
     e.preventDefault();
-   if ((deliveryOption === "Pick Up") || (deliveryOption === "Home Delivery" && address.streetAddress && address.city && address.postalCode)) {
+    if ((deliveryOption === "Pick Up") || (deliveryOption === "Home Delivery" && address.streetAddress && address.city && address.postalCode)) {
       setIsOrderPlaced(true);
       setMessage("");
-      // document.getElementById("form").reset();
-let propData = "";
-      // Check delivery option and create propData accordingly
+      
+      let propData = "";
       if (deliveryOption === "Pick Up") {
         propData = "You chose Pick Up. Your pizza will be ready in 30 min.";
-      } else if (deliveryOption === "Home Delivery") {
+      } 
+      else if (deliveryOption === "Home Delivery") {
         propData = `You chose Home Delivery. Your address: ${address.streetAddress}, ${address.city}, ${address.postalCode}`;
       }
 
       router.push({
-        pathname: '/review', 
-        query: { data: propData } 
+        pathname: '/review',
+        query: { data: propData }
       });
 
-    } else { 
-      setMessage("Please fill in all the fields"); }
+    }
+    else {
+      setMessage("Please fill in all the fields");
+    }
+
   };
 
 
@@ -82,11 +84,11 @@ let propData = "";
         {deliveryOption === "Home Delivery" &&
           <>
             <label>Street address:</label>
-            <input type="text" name="streetAddress" value={address.streetAddress} onChange={handleInputChange}/>
+            <input type="text" name="streetAddress" value={address.streetAddress} onChange={handleInputChange} />
             <label>City:</label>
-            <input type="text" name="city" value={address.city} onChange={handleInputChange}/>
+            <input type="text" name="city" value={address.city} onChange={handleInputChange} />
             <label>Postal code:</label>
-            <input type="text" name="postalCode" value={address.postalCode} onChange={handleInputChange}/>
+            <input type="text" name="postalCode" value={address.postalCode} onChange={handleInputChange} />
           </>}
 
         <button type="submit">Place order</button>
