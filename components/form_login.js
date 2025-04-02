@@ -1,5 +1,6 @@
 import { createContext, useState } from "react";
 import styles from "@/styles/Login.module.css";
+import { useRouter } from 'next/router';
 
 export const UserContext = createContext();
 
@@ -8,6 +9,8 @@ function LogIn({ children }) {
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  const router = useRouter();
 
   const nameValidation = (name) => {
     if (name) {
@@ -36,7 +39,11 @@ function LogIn({ children }) {
     if (name && email) {
       setIsLoggedIn(true);
       setMessage("");
-      document.getElementById("form").reset();
+      //document.getElementById("form").reset();
+      router.push({
+        pathname: '/ingredients'
+      });
+
     } else if (!name) {
       setMessage("Please enter your name");
     } else {

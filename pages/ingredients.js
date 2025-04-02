@@ -3,21 +3,27 @@ import { useContext, useState } from "react";
 import { UserContext } from "@/components/form_login";
 import Oven from "@/components/oven";
 import styles from "@/styles/List.module.css";
-import { PizzaProvider } from "@/components/PizzaContext";
+import { PizzaProvider, PizzaContext, usePizza } from "@/components/PizzaContext";
 
 export default function Home() {
-  //   const { name } = useContext(UserContext);
+    const { selectedToppings } = usePizza();
+
 
   return (
-    <PizzaProvider>
+    // <PizzaProvider>
+    
+   // I added this div to have a parent tag
+    <div> 
       <div style={{ margin: "30px 0", width: "100%", textAlign: "center" }}>
         <h2 style={{ marginBottom: "10px" }}>Make Your Pizza</h2>
         <p>Please select the ingredients you'd like on your pizza.</p>
       </div>
       <div className={styles.listOven}>
         <List />
-        <Oven />
+        <Oven />     
       </div>
-    </PizzaProvider>
+
+      </div> // I added this div to have a parent tag
+    // </PizzaProvider> 
   );
 }
