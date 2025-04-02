@@ -1,29 +1,35 @@
-import { createContext, useState } from "react";
+import { useContext, useState } from "react";
 import styles from "@/styles/Login.module.css";
+import { useRouter } from 'next/router';
+import { UserContext, useUserContext } from "./UserContext";
 
-export const UserContext = createContext();
+
 
 function LogIn({ children }) {
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
+  // const [name, setName] = useState("");
+  // const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
-  const nameValidation = (name) => {
-    if (name) {
-      setName(name);
+const { name, email, setName, setEmail } = useContext(UserContext);
+
+  const router = useRouter();
+
+  const nameValidation = (uname) => {
+    if (uname) {
+      setName(uname);
       setMessage("");
     } else {
       setMessage("Please enter your name");
     }
   };
 
-  const emailValidation = (email) => {
+  const emailValidation = (uemail) => {
     const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
-    if (email && emailRegex.test(email)) {
-      setEmail(email);
+    if (emailRegex.test(uemail)) {
+      setEmail(uemail);
       setMessage("");
-    } else if (email == "") {
+    } else if (uemail == "") {
       setMessage("Please enter your email");
     } else {
       setMessage("Please enter valid email");
@@ -36,7 +42,11 @@ function LogIn({ children }) {
     if (name && email) {
       setIsLoggedIn(true);
       setMessage("");
-      document.getElementById("form").reset();
+      //document.getElementById("form").reset();
+      router.push({
+        pathname: '/ingredients'
+      });
+
     } else if (!name) {
       setMessage("Please enter your name");
     } else {
@@ -56,10 +66,10 @@ function LogIn({ children }) {
             <h2>Login</h2>
             <form onSubmit={handleLogin} id="form" className={styles.form}>
               <label>Name</label>
-              <input type="text" onBlur={(e) => nameValidation(e.target.value)} />
+              <input type="text" onChange={(e) => nameValidation(e.target.value)} />
 
               <label>Email</label>
-              <input type="email" onBlur={(e) => emailValidation(e.target.value)} />
+              <input type="email" onChange={(e) => emailValidation(e.target.value)} />
 
               <button type="submit">Log In</button>
             </form>
@@ -67,15 +77,15 @@ function LogIn({ children }) {
           </div>
         </div>
       )}
-      {/* renders only if user is logged in */}
+      {/* renders only if user is logged in
       {isLoggedIn && (
         <div className={styles.welcome}>
           <h2>Welcome, {name}!</h2>
           <button onClick={(e) => setIsLoggedIn(!isLoggedIn)}>Logout</button>
         </div>
-      )}
+      )} */}
 
-      <UserContext.Provider value={{ name, email }}>{children}</UserContext.Provider>
+      {/* <UserContext.Provider value={{ name, email }}>{children}</UserContext.Provider> */}
     </div>
   );
 }

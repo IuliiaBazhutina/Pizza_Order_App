@@ -73,7 +73,7 @@ function List() {
       <div className={styles.total}>
         <p>Total: ${calculateTotal()}</p>
         {selectedToppings.length > 0 && (
-          <Link href="./checkout">
+          <Link href="./delivery">
             <span>Checkout</span>
           </Link>
         )}

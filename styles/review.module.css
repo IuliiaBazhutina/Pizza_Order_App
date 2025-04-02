@@ -1,0 +1,48 @@
+.listOven {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  gap: 60px;
+  padding: 60px;
+  background-color: var(--medium);
+  border-radius: 5px;
+  border: 3px solid var(--dark);
+  justify-content: center;
+  align-items: center;
+}
+.toppings {
+  width: 300px;
+  background-color: var(--lightest);
+  padding: 20px;
+  border-radius: 5px;
+  border: solid 1px var(--darkest);
+}
+.list {
+  padding: 5px;
+}
+.filters {
+  padding: 10px;
+  background-color: var(--light);
+  border-radius: 5px;
+}
+
+.total {
+  background-color: var(--lightest);
+  margin: 20px 0;
+  padding: 20px;
+  border-radius: 5px;
+  font-weight: 800;
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  justify-content: space-between;
+}
+.total span {
+  background-color: var(--accent);
+  padding: 5px 10px;
+  border-radius: 5px;
+  border: 2px solid var(--medium);
+}
+.total span:hover {
+  background-color: #1b2930;
+}
