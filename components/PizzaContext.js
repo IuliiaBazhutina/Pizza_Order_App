@@ -1,10 +1,11 @@
 import { createContext, useState, useContext } from "react";
+import toppings from "./toppings";
 
 // Create context for overall pizza order
 export const PizzaContext = createContext();
 
 export const PizzaProvider = ({ children }) => {
-  const [selectedToppings, setSelectedToppings] = useState([]);
+  const [selectedToppings, setSelectedToppings] = useState([toppings[10]]);
 
   // Calculate total price of selected items
   const calculateTotal = () => {

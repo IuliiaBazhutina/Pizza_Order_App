@@ -3,7 +3,7 @@ import { createContext, useContext, useState } from "react";
 export const UserContext = createContext();
 
 export const UserContextProvider = ({ children }) => {
-  const [name, setName] = useState("");
+  const [name, setName] = useState("Customer");
   const [email, setEmail] = useState("");
 
   return (
@@ -12,8 +12,9 @@ export const UserContextProvider = ({ children }) => {
         name,
         setName,
         email,
-        setEmail
-      }}>
+        setEmail,
+      }}
+    >
       {children}
     </UserContext.Provider>
   );
@@ -21,5 +22,3 @@ export const UserContextProvider = ({ children }) => {
 
 // Hook to use the user info context
 // export const useUserContext = () => useContext(UserContext);
-
-

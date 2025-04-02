@@ -1,9 +1,7 @@
 import { useContext, useState } from "react";
 import styles from "@/styles/Login.module.css";
-import { useRouter } from 'next/router';
+import { useRouter } from "next/router";
 import { UserContext, useUserContext } from "./UserContext";
-
-
 
 function LogIn({ children }) {
   // const [name, setName] = useState("");
@@ -11,7 +9,7 @@ function LogIn({ children }) {
   const [message, setMessage] = useState("");
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
-const { name, email, setName, setEmail } = useContext(UserContext);
+  const { name, email, setName, setEmail } = useContext(UserContext);
 
   const router = useRouter();
 
@@ -44,9 +42,8 @@ const { name, email, setName, setEmail } = useContext(UserContext);
       setMessage("");
       //document.getElementById("form").reset();
       router.push({
-        pathname: '/ingredients'
+        pathname: "/ingredients",
       });
-
     } else if (!name) {
       setMessage("Please enter your name");
     } else {
