@@ -1,11 +1,12 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import styles from "@/styles/List.module.css";
 import { PizzaContext, usePizza } from "./PizzaContext";
 
 function List() {
   const [isFilterChecked, setIsFilterChecked] = useState(false);
-  const { selectedToppings, toggleTopping, calculateTotal } = usePizza();
+  const { selectedToppings, toggleTopping, calculateTotal, hasCrust } = usePizza();
+  // const [total , setTotal] = useState("0.00");
 
   const items = [
     { id: 1, name: "Basil", vegetarian: true, price: 1.5 },
@@ -22,13 +23,44 @@ function List() {
     { id: 12, name: "Whole Wheat Crust", vegetarian: true, price: 1.0 },
   ];
 
+  // // Cals
+  // useEffect(() => {
+  //   const newTotal = calculateTotal();
+  //   setTotal(newTotal);
+  // }, [selectedToppings, calculateTotal]);
+
   //filtered list
   const filteredItems = isFilterChecked ? items.filter((item) => item.vegetarian) : items;
 
   // Function to handle item click and toggle selection
-  // Uses Pizza Context
+  // Uses Pizza Context 
+  // also ensures only one crust can be selected at a time
   const onSelectItem = (item) => {
+     // Check if the clicked item is a crust
+  const isCrust = item.name.includes("Crust");
+  if (isCrust) {
+    // Remove any existing crust from selectedToppings
+    const existingCrust = selectedToppings.find(topping => 
+      topping.name.includes("Crust")
+    );
+    
+    if (existingCrust) {
+      // If clicked crust is different from existing crust, remove existing and add new
+      if (existingCrust.id !== item.id) {
+        toggleTopping(existingCrust); // Remove existing crust
+        toggleTopping(item); // Add new crust
+      } else {
+        // If same crust clicked, just toggle it
+        toggleTopping(item);
+      }
+    } else {
+      // No crust selected, just add the new one
+      toggleTopping(item);
+    }
+  } else {
+    // Not a crust, handle normally
     toggleTopping(item);
+  }
   };
 
   //style
@@ -72,7 +104,7 @@ function List() {
 
       <div className={styles.total}>
         <p>Total: ${calculateTotal()}</p>
-        {selectedToppings.length > 0 && (
+        {selectedToppings.length > 0 && hasCrust() && (
           <Link href="./delivery">
             <span>Checkout</span>
           </Link>
