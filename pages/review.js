@@ -1,23 +1,21 @@
 import { PizzaContext, usePizza } from "@/components/PizzaContext";
-import { createContext, useState, useContext } from "react";
+import { createContext, useEffect, useContext } from "react";
 import { PizzaProvider } from "@/components/PizzaContext";
 import { useRouter } from "next/router";
 import styles from "@/styles/review.module.css";
 import { UserContext } from "@/components/UserContext";
 
 export default function Account() {
-  const { selectedToppings } = useContext(PizzaContext);
-
+  const { selectedToppings, calculateTotal, hasCrust } = useContext(PizzaContext);
   const { name } = useContext(UserContext);
-
-  const { calculateTotal } = useContext(PizzaContext); // Access the function from context
-
-  const handleCalculateTotal = () => {
-    calculateTotal();
-  };
-
   const router = useRouter();
   const { data } = router.query;
+
+  useEffect(() => {
+    if (!hasCrust()) {
+      router.push('/ingredients');
+    }
+  }, [hasCrust, router]);
 
   return (
     <div>

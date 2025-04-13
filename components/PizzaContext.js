@@ -1,14 +1,24 @@
 import { createContext, useState, useContext } from "react";
-import toppings from "./toppings";
 
 // Create context for overall pizza order
 export const PizzaContext = createContext();
 
 export const PizzaProvider = ({ children }) => {
-  const [selectedToppings, setSelectedToppings] = useState([toppings[10]]);
+  const [selectedToppings, setSelectedToppings] = useState([]);
+
+  // Crust verification
+  // Check if user has selected a crust before allowing checkout options
+  const hasCrust = () => {
+    return selectedToppings.some(item => 
+      item.name === "Classic Crust" || item.name === "Whole Wheat Crust"
+    );
+  };
 
   // Calculate total price of selected items
   const calculateTotal = () => {
+    if (!hasCrust()) {
+      return <small style={{color:"red"}}><br/>Please select a crust.</small>;
+    }
     return selectedToppings.reduce((total, item) => total + item.price, 0).toFixed(2);
   };
 
@@ -33,6 +43,7 @@ export const PizzaProvider = ({ children }) => {
         setSelectedToppings,
         toggleTopping,
         calculateTotal,
+        hasCrust,
       }}
     >
       {children}
