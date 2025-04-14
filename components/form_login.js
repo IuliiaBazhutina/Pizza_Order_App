@@ -4,12 +4,9 @@ import { useRouter } from "next/router";
 import { UserContext, useUserContext } from "./UserContext";
 
 function LogIn({ children }) {
-  // const [name, setName] = useState("");
-  // const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
-  const { name, email, setName, setEmail } = useContext(UserContext);
+  const { name, email, setName, setEmail, isLoggedIn, setIsLoggedIn } = useContext(UserContext);
 
   const router = useRouter();
 
@@ -40,7 +37,6 @@ function LogIn({ children }) {
     if (name && email) {
       setIsLoggedIn(true);
       setMessage("");
-      //document.getElementById("form").reset();
       router.push({
         pathname: "/ingredients",
       });
@@ -49,6 +45,13 @@ function LogIn({ children }) {
     } else {
       setMessage("Please enter your email");
     }
+  };
+
+  // Handle logout form submission
+  const handleLogout = () => {
+    setIsLoggedIn(false);
+    setName("Customer");
+    setEmail("");
   };
 
   return (
@@ -74,15 +77,13 @@ function LogIn({ children }) {
           </div>
         </div>
       )}
-      {/* renders only if user is logged in
+      {/* renders only if user is logged in */}
       {isLoggedIn && (
         <div className={styles.welcome}>
           <h2>Welcome, {name}!</h2>
-          <button onClick={(e) => setIsLoggedIn(!isLoggedIn)}>Logout</button>
+          <button onClick={handleLogout}>Logout</button>
         </div>
-      )} */}
-
-      {/* <UserContext.Provider value={{ name, email }}>{children}</UserContext.Provider> */}
+      )}
     </div>
   );
 }
