@@ -1,40 +1,62 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/pages/api-reference/create-next-app).
+# Pizza Ordering App
 
-## Getting Started
+A Next.js application that simulates a pizza ordering system, allowing users to customize their pizza with various toppings, see a custom pizza visualization, choose delivery options, and complete their order.
 
-First, run the development server:
+## Application Structure
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+### Components
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+- **`form_login.js`**: User authentication component that validates name and email input.
+- **`form_delivery.js`**: Form for selecting delivery method (pickup or home delivery) with address input fields.
+- **`list.js`**: Displays available pizza toppings with prices and allows filtering for vegetarian options.
+- **`Nav.js`**: Navigation bar with conditional links based on order state.
+- **`oven.js`**: Visual representation of a pizza oven containing the pizza preview.
+- **`pizza.js`**: Dynamic pizza visualization that updates based on selected toppings.
+- **`toppings.js`**: Contains data about available toppings with images.
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+### Context Providers
 
-[API routes](https://nextjs.org/docs/pages/building-your-application/routing/api-routes) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
+- **`PizzaContext.js`**: Manages pizza customization state:
+  - Tracks selected toppings
+  - Calculates total price
+  - Verifies crust selection
+  - Provides toggle functionality for adding/removing toppings
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/pages/building-your-application/routing/api-routes) instead of React pages.
+- **`UserContext.js`**: Manages user information:
+  - Stores user name and email
+  - Provides methods to update user data
 
-This project uses [`next/font`](https://nextjs.org/docs/pages/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### Pages
 
-## Learn More
+- **`index.js`**: Landing page with login form
+- **`ingredients.js`**: Toppings selection page with pizza visualization
+- **`delivery.js`**: Delivery options selection
+- **`review.js`**: Order confirmation and receipt
 
-To learn more about Next.js, take a look at the following resources:
+## State Management
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn-pages-router) - an interactive Next.js tutorial.
+The application uses React Context API for state management across components:
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+1. **Pizza State**:
+   - Selected toppings array
+   - Total price calculation
+   - Crust verification logic
 
-## Deploy on Vercel
+2. **User State**:
+   - Name and email information
+   - Form validation
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Key Features
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/pages/building-your-application/deploying) for more details.
+- **Custom Pizza Visualization**: Real-time visual representation of the pizza updates as toppings are selected
+- **Crust Requirement**: Orders cannot proceed without selecting a crust
+- **Vegetarian Filtering**: Option to filter toppings list to show only vegetarian items
+- **Form Validation**: Email validation and required field checking
+- **Conditional Navigation**: Routes are conditionally available based on order state
+
+## App Usage
+
+1. User logs in with name and email
+2. User selects pizza toppings (must include a crust)
+3. User chooses delivery method (pickup or home delivery)
+4. Order is reviewed and confirmed
