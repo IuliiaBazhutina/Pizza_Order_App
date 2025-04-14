@@ -7,16 +7,13 @@ import { UserContextProvider } from "@/components/UserContext";
 
 export default function App({ Component, pageProps }) {
   return (
-  
-    <PizzaProvider>
-      <UserContextProvider>
-      <Nav />
-      <div className={styles.wrapper}>
-        <Component {...pageProps} />
-      </div>
-    </UserContextProvider>    
-  </PizzaProvider> 
-
+    <UserContextProvider>
+      <PizzaProvider>
+        <Nav />
+        <div className={styles.wrapper}>
+          <Component {...pageProps} />
+        </div>
+      </PizzaProvider>
+    </UserContextProvider>
   );
- 
 }
