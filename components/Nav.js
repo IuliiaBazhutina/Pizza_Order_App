@@ -8,19 +8,28 @@ const Nav = () => {
 
   return (
     <nav className={styles.header}>
-      <div>
+      <div className={styles.navWrapper}>
+        <div className={styles.navItem}>
         <Link href="/">
           <span>Home</span>
         </Link>
+        </div>
+        <div className={styles.navItem}>
         <Link href="./ingredients">
           <span>Choose toppings</span>
         </Link>
-        {hasCrust() && <Link href="./delivery">
-          <span>Delivery options</span>
-        </Link>}
-        {hasCrust() && <Link href="./review">
-          <span>Receipt</span>
-        </Link>}
+        </div>
+        {hasCrust() && <div className={styles.navItem}>
+          <Link href="./delivery">
+            <span>Delivery options</span>
+          </Link>
+          </div>}
+        {hasCrust() &&
+          <div className={styles.navItem}>
+          <Link href="./review">
+            <span>Receipt</span>
+          </Link>
+          </div>}
       </div>
     </nav>
   );

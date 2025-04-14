@@ -9,9 +9,9 @@ export default function Home() {
 
   return (
     <div> 
-      <div style={{ margin: "30px 0", width: "100%", textAlign: "center" }}>
+      <div style={{ margin: "10px 0 20px 0", width: "100%", textAlign: "center" }}>
         <h2 style={{ marginBottom: "10px" }}>Make Your Pizza</h2>
-        <p>{name}, please select the ingredients you'd like on your pizza.</p>
+        <p>{name}, please select the ingredients <br/> you'd like on your pizza.</p>
       </div>
       <div className={styles.listOven}>
         <List />

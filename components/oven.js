@@ -2,7 +2,7 @@ import styles from "@/styles/Pizza.module.css";
 import Pizza from "./pizza";
 const Oven = () => {
   return (
-    <div>
+    <div className={styles.ovenWrapper}>
       <div className={styles.controls}>
         <div className={styles.controlsTop}></div>
         <div className={styles.controlsBottom}></div>

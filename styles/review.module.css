@@ -16,6 +16,7 @@
   padding: 20px;
   border-radius: 5px;
   border: solid 1px var(--darkest);
+  margin: 5px auto;
 }
 .list {
   padding: 5px;
