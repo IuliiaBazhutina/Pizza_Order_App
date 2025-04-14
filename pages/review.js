@@ -1,6 +1,5 @@
-import { PizzaContext, usePizza } from "@/components/PizzaContext";
-import { createContext, useEffect, useContext } from "react";
-import { PizzaProvider } from "@/components/PizzaContext";
+import { PizzaContext } from "@/components/PizzaContext";
+import { useEffect, useContext } from "react";
 import { useRouter } from "next/router";
 import styles from "@/styles/review.module.css";
 import { UserContext } from "@/components/UserContext";
@@ -18,7 +17,7 @@ export default function Account() {
   }, [hasCrust, router]);
 
   return (
-    <div>
+    <div style={{ textAlign: "center", width: "100%", margin: "0 auto" }}>
       <h1>{name}, thank you for your order!</h1>
 
       <h3 style={{ marginTop: "30px" }}>{name}'s pizza:</h3>

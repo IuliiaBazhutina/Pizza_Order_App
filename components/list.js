@@ -1,12 +1,11 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import Link from "next/link";
 import styles from "@/styles/List.module.css";
-import { PizzaContext, usePizza } from "./PizzaContext";
+import { usePizza } from "./PizzaContext";
 
 function List() {
   const [isFilterChecked, setIsFilterChecked] = useState(false);
   const { selectedToppings, toggleTopping, calculateTotal, hasCrust } = usePizza();
-  // const [total , setTotal] = useState("0.00");
 
   const items = [
     { id: 1, name: "Basil", vegetarian: true, price: 1.5 },
@@ -22,12 +21,6 @@ function List() {
     { id: 11, name: "Classic Crust", vegetarian: true, price: 0.5 },
     { id: 12, name: "Whole Wheat Crust", vegetarian: true, price: 1.0 },
   ];
-
-  // // Cals
-  // useEffect(() => {
-  //   const newTotal = calculateTotal();
-  //   setTotal(newTotal);
-  // }, [selectedToppings, calculateTotal]);
 
   //filtered list
   const filteredItems = isFilterChecked ? items.filter((item) => item.vegetarian) : items;
