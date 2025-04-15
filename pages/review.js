@@ -18,9 +18,9 @@ export default function Account() {
 
   return (
     <div style={{ textAlign: "center", width: "100%", margin: "0 auto" }}>
-      <h1>{name}, thank you for your order!</h1>
+      <h1>{name || "Customer"}, thank you for your order!</h1>
 
-      <h3 style={{ marginTop: "30px" }}>{name}'s pizza:</h3>
+      <h3 style={{ marginTop: "30px" }}>{name || "Customer"}'s pizza:</h3>
 
       <div className={styles.toppings}>
         <ul className={styles.list}>
@@ -37,6 +37,7 @@ export default function Account() {
         </ul>
       </div>
       <p style={{ fontWeight: "bold", marginTop: "30px" }}>{data}</p>
+      <p style={{ fontWeight: "bold", marginTop: "50px", color: "red" }}>Placeholder for API integration data</p>
     </div>
   );
 }
