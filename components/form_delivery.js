@@ -91,12 +91,9 @@ export default function Delivery() {
             <input type="text" name="postalCode" value={address.postalCode} onChange={handleInputChange} />
           </>}
 
-        <button type="submit">Place order</button>
+        {deliveryOption && <button type="submit">Place order</button>}
       </form>
       <p>{message}</p>
-      {/* <Link href={{ pathname: '/review', query: { data: prop } }}>
-        Review the order
-      </Link> */}
     </div>
 
   );

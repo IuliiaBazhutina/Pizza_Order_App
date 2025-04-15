@@ -40,9 +40,9 @@ function LogIn({ children }) {
       router.push({
         pathname: "/ingredients",
       });
-    } else if (!name) {
-      setMessage("Please enter your name");
-    } else {
+    } else if (!name) { 
+      setMessage("Please enter your name")}
+    else {
       setMessage("Please enter your email");
     }
   };
@@ -50,7 +50,7 @@ function LogIn({ children }) {
   // Handle logout form submission
   const handleLogout = () => {
     setIsLoggedIn(false);
-    setName("Customer");
+    setName("");
     setEmail("");
   };
 
