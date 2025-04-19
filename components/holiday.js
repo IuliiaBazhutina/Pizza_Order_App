@@ -53,19 +53,20 @@ function HolidayAPI({ countryCode = "CA", year = new Date().getFullYear() }) {
           marginTop: "20px",
         }}
       >
-        <h3
+        <p
           style={{
-            color: todaysHoliday ? "red" : "green",
             margin: "0 0 10px 0",
           }}
         >
           {todaysHoliday && (
             <div>
-              Today is {todaysHoliday.localName}. Due to higher order volume, please allow for
-              longer processing times. <OpenHours />
+              Today is <strong>{todaysHoliday.localName}</strong>! Due to higher order volume,
+              please allow for longer processing times.
+              <br />
+              <strong>{todaysHoliday.date}</strong>
             </div>
           )}
-        </h3>
+        </p>
         <OpenHours />
       </div>
     </div>

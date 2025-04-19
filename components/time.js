@@ -53,7 +53,7 @@ function OpenHours() {
             margin: "0 0 10px 0",
           }}
         >
-          {isBusinessHours ? "OPEN" : "CLOSED"}
+          {isBusinessHours ? "We are OPEN" : "We are CLOSED"}
         </h3>
 
         {!isBusinessHours && <p>Business hours are from 10 AM to 11 PM.</p>}
