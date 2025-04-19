@@ -1,24 +1,43 @@
 import { createContext, useState, useContext } from "react";
-
+import { useBusinessHours } from "./time";
 
 // Create context for overall pizza order
 export const PizzaContext = createContext();
 
 export const PizzaProvider = ({ children }) => {
   const [selectedToppings, setSelectedToppings] = useState([]);
+  const { isBusinessHours } = useBusinessHours();
 
   // Crust verification
   // Check if user has selected a crust before allowing checkout options
   const hasCrust = () => {
-    return selectedToppings.some(item => 
-      item.name === "Classic Crust" || item.name === "Whole Wheat Crust"
+    return selectedToppings.some(
+      (item) => item.name === "Classic Crust" || item.name === "Whole Wheat Crust"
     );
+  };
+
+  // Check if order can proceed
+  const canOrder = () => {
+    return isBusinessHours && hasCrust();
   };
 
   // Calculate total price of selected items
   const calculateTotal = () => {
     if (!hasCrust()) {
-      return <small style={{color:"red"}}><br/>Please select a crust.</small>;
+      return (
+        <small style={{ color: "red" }}>
+          <br />
+          Please select a crust.
+        </small>
+      );
+    }
+    if (!isBusinessHours) {
+      return (
+        <small style={{ color: "red" }}>
+          <br />
+          We are currently closed. Orders can only be placed during business hours (10 AM - 11 PM).
+        </small>
+      );
     }
     return selectedToppings.reduce((total, item) => total + item.price, 0).toFixed(2);
   };
@@ -45,6 +64,8 @@ export const PizzaProvider = ({ children }) => {
         toggleTopping,
         calculateTotal,
         hasCrust,
+        canOrder,
+        isBusinessHours,
       }}
     >
       {children}

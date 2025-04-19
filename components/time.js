@@ -1,6 +1,10 @@
-import { useState, useEffect } from "react";
+// time.js - Updated version
+import { useState, useEffect, createContext, useContext } from "react";
 
-function OpenHours() {
+// Create context for business hours
+export const BusinessHoursContext = createContext();
+
+export function BusinessHoursProvider({ children }) {
   const [isBusinessHours, setIsBusinessHours] = useState(false);
   const [currentTime, setCurrentTime] = useState(new Date());
 
@@ -19,6 +23,19 @@ function OpenHours() {
     const interval = setInterval(checkBusinessHours, 60000);
     return () => clearInterval(interval);
   }, []);
+
+  return (
+    <BusinessHoursContext.Provider value={{ isBusinessHours, currentTime }}>
+      {children}
+    </BusinessHoursContext.Provider>
+  );
+}
+
+// Hook to use the business hours context
+export const useBusinessHours = () => useContext(BusinessHoursContext);
+
+function OpenHours() {
+  const { isBusinessHours, currentTime } = useBusinessHours();
 
   return (
     <div>
