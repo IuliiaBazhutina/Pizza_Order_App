@@ -35,7 +35,8 @@ export const PizzaProvider = ({ children }) => {
       return (
         <small style={{ color: "red" }}>
           <br />
-          We are currently closed. Orders can only be placed during business hours (10 AM - 11 PM).
+          We are closed. <br />
+          Hours: 10 AM - 11 PM
         </small>
       );
     }
