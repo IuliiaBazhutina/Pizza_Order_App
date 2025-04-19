@@ -3,6 +3,7 @@ import { useEffect, useContext } from "react";
 import { useRouter } from "next/router";
 import styles from "@/styles/review.module.css";
 import { UserContext } from "@/components/UserContext";
+import Holiday from "@/components/holiday";
 
 export default function Account() {
   const { selectedToppings, calculateTotal, hasCrust } = useContext(PizzaContext);
@@ -12,7 +13,7 @@ export default function Account() {
 
   useEffect(() => {
     if (!hasCrust()) {
-      router.push('/ingredients');
+      router.push("/ingredients");
     }
   }, [hasCrust, router]);
 
@@ -25,7 +26,10 @@ export default function Account() {
       <div className={styles.toppings}>
         <ul className={styles.list}>
           {selectedToppings.map((item) => (
-            <div style={{ display: "flex", justifyContent: "space-between", width: "200px" }}>
+            <div
+              key={item.id}
+              style={{ display: "flex", justifyContent: "space-between", width: "200px" }}
+            >
               <span>{item.name}</span>
               <span>{item.price}</span>
             </div>
@@ -37,7 +41,8 @@ export default function Account() {
         </ul>
       </div>
       <p style={{ fontWeight: "bold", marginTop: "30px" }}>{data}</p>
-      <p style={{ fontWeight: "bold", marginTop: "50px", color: "red" }}>Placeholder for API integration data</p>
+      <p style={{ fontWeight: "bold", marginTop: "50px", color: "red" }}></p>
+      <Holiday />
     </div>
   );
 }

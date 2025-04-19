@@ -1,4 +1,5 @@
 import LogIn from "@/components/form_login";
+import OpenHours from "@/components/time";
 
 export default function Home() {
   return (
@@ -6,6 +7,7 @@ export default function Home() {
       <div>
         <LogIn />
       </div>
+      <OpenHours />
     </>
   );
 }
