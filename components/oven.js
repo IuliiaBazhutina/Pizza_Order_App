@@ -1,5 +1,8 @@
 import styles from "@/styles/Pizza.module.css";
-import Pizza from "./pizza";
+import { Suspense, lazy } from "react";
+
+const Pizza = lazy(() => import("@/components/pizza"));
+
 const Oven = () => {
   return (
     <div className={styles.ovenWrapper}>
@@ -9,7 +12,9 @@ const Oven = () => {
       </div>
       <div className={styles.oven}>
         <div className={styles.window}>
-          <Pizza />
+          <Suspense fallback={<div>Cooking...</div>}>
+            <Pizza />
+          </Suspense>
         </div>
       </div>
       <div className={styles.feetWrapper}>

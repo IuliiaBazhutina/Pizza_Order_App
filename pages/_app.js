@@ -1,5 +1,4 @@
 import "@/styles/globals.css";
-import { UserContext } from "@/components/form_login";
 import Nav from "@/components/Nav";
 import styles from "@/styles/Page.module.css";
 import { PizzaProvider } from "@/components/PizzaContext";

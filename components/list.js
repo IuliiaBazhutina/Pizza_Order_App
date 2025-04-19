@@ -26,34 +26,32 @@ function List() {
   const filteredItems = isFilterChecked ? items.filter((item) => item.vegetarian) : items;
 
   // Function to handle item click and toggle selection
-  // Uses Pizza Context 
+  // Uses Pizza Context
   // also ensures only one crust can be selected at a time
   const onSelectItem = (item) => {
-     // Check if the clicked item is a crust
-  const isCrust = item.name.includes("Crust");
-  if (isCrust) {
-    // Remove any existing crust from selectedToppings
-    const existingCrust = selectedToppings.find(topping => 
-      topping.name.includes("Crust")
-    );
-    
-    if (existingCrust) {
-      // If clicked crust is different from existing crust, remove existing and add new
-      if (existingCrust.id !== item.id) {
-        toggleTopping(existingCrust); // Remove existing crust
-        toggleTopping(item); // Add new crust
+    // Check if the clicked item is a crust
+    const isCrust = item.name.includes("Crust");
+    if (isCrust) {
+      // Remove any existing crust from selectedToppings
+      const existingCrust = selectedToppings.find((topping) => topping.name.includes("Crust"));
+
+      if (existingCrust) {
+        // If clicked crust is different from existing crust, remove existing and add new
+        if (existingCrust.id !== item.id) {
+          toggleTopping(existingCrust); // Remove existing crust
+          toggleTopping(item); // Add new crust
+        } else {
+          // If same crust clicked, just toggle it
+          toggleTopping(item);
+        }
       } else {
-        // If same crust clicked, just toggle it
+        // No crust selected, just add the new one
         toggleTopping(item);
       }
     } else {
-      // No crust selected, just add the new one
+      // Not a crust, handle normally
       toggleTopping(item);
     }
-  } else {
-    // Not a crust, handle normally
-    toggleTopping(item);
-  }
   };
 
   //style
