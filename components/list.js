@@ -5,7 +5,7 @@ import { usePizza } from "./PizzaContext";
 
 function List() {
   const [isFilterChecked, setIsFilterChecked] = useState(false);
-  const { selectedToppings, toggleTopping, calculateTotal, hasCrust } = usePizza();
+  const { selectedToppings, toggleTopping, calculateTotal, canOrder } = usePizza();
 
   const items = [
     { id: 1, name: "Basil", vegetarian: true, price: 1.5 },
@@ -95,11 +95,11 @@ function List() {
 
       <div className={styles.total}>
         <p>Total: ${calculateTotal()}</p>
-        {selectedToppings.length > 0 && hasCrust() && (
+        {selectedToppings.length > 0 && canOrder() ? (
           <Link href="./delivery">
             <span>Checkout</span>
           </Link>
-        )}
+        ) : null}
       </div>
     </div>
   );

@@ -1,26 +1,39 @@
-import { useEffect } from 'react';
-import { useRouter } from 'next/router';
-import { usePizza } from '@/components/PizzaContext';
-import Delivery from '@/components/form_delivery'
+import { useEffect } from "react";
+import { useRouter } from "next/router";
+import { usePizza } from "@/components/PizzaContext";
+import Delivery from "@/components/form_delivery";
+import OpenHours from "@/components/time";
 
 export default function Checkout() {
-
   const router = useRouter();
-  const { hasCrust } = usePizza();
+  const { canOrder, hasCrust, isBusinessHours } = usePizza();
 
   useEffect(() => {
-    if (!hasCrust()) {
-      router.push('/ingredients');
+    if (!canOrder()) {
+      if (!hasCrust) {
+        // Redirect to ingredients if no crust is selected
+        router.push("/ingredients");
+      }
     }
-  }, [hasCrust, router]);
+  }, [canOrder, isBusinessHours, router]);
 
   return (
     <>
       <div>
-      <h2>Choose a delivery option:</h2>
-          
+        {!isBusinessHours && (
+          <div style={{ color: "red", fontWeight: "bold", marginBottom: "20px" }}>
+            Sorry, we are currently closed. Orders can only be placed during business hours (10 AM -
+            11 PM).
+            <OpenHours />
+          </div>
+        )}
       </div>
-    <Delivery/>
+      {isBusinessHours && (
+        <div>
+          <h2>Choose a delivery option:</h2>
+          <Delivery />
+        </div>
+      )}
     </>
   );
 }
